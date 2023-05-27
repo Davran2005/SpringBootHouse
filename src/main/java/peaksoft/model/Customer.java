@@ -17,7 +17,7 @@ import static jakarta.persistence.CascadeType.*;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
+
 public class Customer {
     @Id
     @GeneratedValue(generator = "costumer_gen",strategy = GenerationType.SEQUENCE)
@@ -33,9 +33,11 @@ public class Customer {
     private String phoneNumber;
     private LocalDate dataOfBirth;
     private String photo;
+    @Transient
+    private Long agencyId;
 
-    @ManyToMany(cascade = {DETACH, MERGE,REFRESH,REMOVE})
+    @ManyToMany(cascade = {DETACH, MERGE,REFRESH})
     private List<Agency>agencies;
-    @OneToMany(mappedBy = "customer",cascade = {DETACH, MERGE,REFRESH})
+    @OneToMany(mappedBy = "customer",cascade = {DETACH, MERGE,REFRESH,REMOVE})
     private List<Booking>bookings;
 }

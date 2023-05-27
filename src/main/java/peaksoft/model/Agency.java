@@ -15,7 +15,7 @@ import static jakarta.persistence.CascadeType.*;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
+
 public class Agency {
     @Id
     @GeneratedValue(generator = "agency_gen",strategy = GenerationType.SEQUENCE)

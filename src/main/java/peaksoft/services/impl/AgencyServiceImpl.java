@@ -16,47 +16,48 @@ public class AgencyServiceImpl implements AgencyServices {
 
     @Override
     public void saveAgency(Agency agency) {
-        if (!agency.getName().isBlank()) {
-            if (!agency.getCountry().isBlank()) {
-                if (agency.getPhoneNumber().startsWith("+996") || agency.getPhoneNumber().length() == 13) {
-                    if (!agency.getEmail().isBlank() || agency.getEmail().contains("@gmail.com")) {
-                        if (!agency.getPhoto().isBlank()) {
-                            agencyRepository.save(agency);
-                        } else {
-                            try {
-                                throw new MyException("Agency name is blank");
-                            } catch (MyException e) {
-                                System.err.println(e.getMessage());
-                            }
-                        }
-                    } else {
-                        try {
-                            throw new MyException("Agency email contains @gmail.com");
-                        } catch (MyException e) {
-                            System.err.println(e.getMessage());
-                        }
-                    }
-                } else {
-                    try {
-                        throw new MyException("Agency phone +996 and length=13");
-                    } catch (MyException e) {
-                        System.err.println(e.getMessage());
-                    }
-                }
-            } else {
-                try {
-                    throw new MyException("Agency country is blank");
-                } catch (MyException e) {
-                    System.err.println(e.getMessage());
-                }
-            }
-        } else {
-            try {
-                throw new MyException("Agency name is blank");
-            } catch (MyException e) {
-                System.err.println(e.getMessage());
-            }
-        }
+//        if (!agency.getName().isBlank()) {
+//            if (!agency.getCountry().isBlank()) {
+//                if (agency.getPhoneNumber().startsWith("+996") || agency.getPhoneNumber().length() == 13) {
+//                    if (!agency.getEmail().isBlank() || agency.getEmail().contains("@gmail.com")) {
+//                        if (!agency.getPhoto().isBlank()) {
+//                            agencyRepository.save(agency);
+//                        } else {
+//                            try {
+//                                throw new MyException("Agency name is blank");
+//                            } catch (MyException e) {
+//                                System.err.println(e.getMessage());
+//                            }
+//                        }
+//                    } else {
+//                        try {
+//                            throw new MyException("Agency email contains @gmail.com");
+//                        } catch (MyException e) {
+//                            System.err.println(e.getMessage());
+//                        }
+//                    }
+//                } else {
+//                    try {
+//                        throw new MyException("Agency phone +996 and length=13");
+//                    } catch (MyException e) {
+//                        System.err.println(e.getMessage());
+//                    }
+//                }
+//            } else {
+//                try {
+//                    throw new MyException("Agency country is blank");
+//                } catch (MyException e) {
+//                    System.err.println(e.getMessage());
+//                }
+//            }
+//        } else {
+//            try {
+//                throw new MyException("Agency name is blank");
+//            } catch (MyException e) {
+//                System.err.println(e.getMessage());
+//            }
+//        }
+        agencyRepository.save(agency);
     }
 
     @Override
@@ -72,28 +73,30 @@ public class AgencyServiceImpl implements AgencyServices {
     @Override
     public void updateAgency(Long id, Agency agency) throws MyException {
         Agency agency1 = agencyRepository.findById(id).orElseThrow(() -> new MyException("Agency by id: " + id + " is not found!!!"));
-        if (!agency.getName().isBlank()) {
-            agency1.setName(agency.getName());
-            if (!agency.getCountry().isBlank()) {
-                agency1.setCountry(agency.getCountry());
-                if (agency.getPhoneNumber().startsWith("+996") || agency.getPhoneNumber().length() == 13) {
-                    agency1.setPhoneNumber(agency.getPhoneNumber());
-                    if (!agency.getEmail().isBlank() || agency.getEmail().contains("@gmail.com")) {
-                        agency1.setEmail(agency.getEmail());
-                        if (!agency.getPhoto().isBlank()) {
-                            agency1.setPhoto(agency.getPhoto());
-                            agencyRepository.save(agency);
-                        }
-                    }
-                }
-            }
-        }
+//        if (!agency.getName().isBlank()) {
+//            agency1.setName(agency.getName());
+//            if (!agency.getCountry().isBlank()) {
+//                agency1.setCountry(agency.getCountry());
+//                if (agency.getPhoneNumber().startsWith("+996") || agency.getPhoneNumber().length() == 13) {
+//                    agency1.setPhoneNumber(agency.getPhoneNumber());
+//                    if (!agency.getEmail().isBlank() || agency.getEmail().contains("@gmail.com")) {
+//                        agency1.setEmail(agency.getEmail());
+//                        if (!agency.getPhoto().isBlank()) {
+//                            agency1.setPhoto(agency.getPhoto());
+//                        }
+//                        agencyRepository.save(agency);
+//                    }
+//                }
+//            }
+//        }
+        agency.setId(agency1.getId());
+        agencyRepository.save(agency);
     }
 
     @Override
     public void deleteAgencyById(Long id) throws MyException {
         Agency agency = agencyRepository.findById(id).orElseThrow(() -> new MyException("Agency by id: " + id + " is not found!!!"));
-        agencyRepository.deleteById(agency.getId());
+        agencyRepository.delete(agency);
     }
 
     @Override

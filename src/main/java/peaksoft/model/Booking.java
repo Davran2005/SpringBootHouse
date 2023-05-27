@@ -13,7 +13,7 @@ import static jakarta.persistence.CascadeType.*;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
+
 public class Booking {
     @Id
     @GeneratedValue(generator = "booking_gen", strategy = GenerationType.SEQUENCE)

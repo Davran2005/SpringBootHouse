@@ -1,10 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
   <meta charset="UTF-8">
-  <title>$Title$</title>
+  <title>Assign</title>
 </head>
 <body>
-$END$
+<form th:method="POST" th:action="@{/customer/saveAssign/{id}(id=${customers.getId()})} "  th:object="${customers}">
+  <div class="mb-3">
+    <label for="agencyName" class="form-label">Select agency</label>
+    <select class="form-select" id="agencyName" name="agencyName" required>
+      <option value="">Choose...</option>
+      <option th:each="agency1 : ${agency}" th:value="${agency1.getId()}" th:text="${agency1.name}"></option>
+    </select>
+  </div>
+  <button type="submit">Assign agency</button>
+</form>
 </body>
 </html>

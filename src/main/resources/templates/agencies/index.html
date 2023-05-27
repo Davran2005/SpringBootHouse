@@ -127,7 +127,7 @@
       background: none;
       color: #8b8ba7;
     }
-    /* styling of whole input container */
+
     .form {
       --timing: 0.3s;
       --width-of-input: 200px;
@@ -147,7 +147,7 @@
       transition: border-radius 0.5s ease;
       background: var(--input-bg,#fff);
     }
-    /* styling of Input */
+
     .input {
       font-size: 0.9rem;
       background-color: transparent;
@@ -157,7 +157,7 @@
       padding-block: 0.7em;
       border: none;
     }
-    /* styling of animated border */
+
     .form:before {
       content: "";
       position: absolute;
@@ -179,24 +179,23 @@
     input:focus {
       outline: none;
     }
-    /* here is code of animated border */
+
     .form:focus-within:before {
       transform: scale(1);
     }
-    /* styling of close button */
-    /* == you can click the close button to remove text == */
+
     .reset {
       border: none;
       background: none;
       opacity: 0;
       visibility: hidden;
     }
-    /* close button shown when typing */
+
     input:not(:placeholder-shown) ~ .reset {
       opacity: 1;
       visibility: visible;
     }
-    /* sizing svg icons */
+
     .form svg {
       width: 17px;
       margin-top: 3px;
@@ -215,25 +214,13 @@
 </head>
 <body>
 <div class="header">
-  <a th:href="@{/agencies}">
-    <a class="logo" th:href="@{/agencies}">Peaksoft</a>
-  </a>
-<!--  <form class="form" style="margin-left: 500px">-->
-<!--    <button>-->
-<!--      <svg width="17" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="search">-->
-<!--        <path d="M7.667 12.667A5.333 5.333 0 107.667 2a5.333 5.333 0 000 10.667zM14.334 14l-2.9-2.9" stroke="currentColor" stroke-width="1.333" stroke-linecap="round" stroke-linejoin="round"></path>-->
-<!--      </svg>-->
-<!--    </button>-->
-<!--    <input class="input" placeholder="Search.." name="keyWord" type="text" th:value="${keyWord}" >-->
-<!--    <button class="reset" type="submit">-->
-<!--      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">-->
-<!--        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>-->
-<!--      </svg>-->
-<!--    </button>-->
-<!--  </form>-->
-  <div class="header-right" >
-    <input class="header-right" type="button">
+  <div class="header-right" style="margin-left:30px " >
+    <input class="header-right"  style="display: none" type="button">
     <a class="active" th:href="@{/agencies/new}" >Add new Agency</a>
+  </div>
+  <div class="header-right" >
+    <input class="header-right" style="display: none"  type="button">
+    <a class="active" th:href="@{/customer}" >Customer</a>
   </div>
 </div>
 <div class="row row-cols-1 row-cols-md-3 g-4">
@@ -242,7 +229,7 @@
       <div class="card">
         <img th:src="*{agency.getPhoto()}" class="card-img-top" alt="Agency image" src="">
         <div class="card-body">
-          <a th:href="@{/agencies/k/{id}(id=${agency.getId()})}">
+          <a th:href="@{/book/(id=${agency.getId()})}">
             <h5 class="card-title" th:text="${agency.getName()}"></h5>
           </a>
           <p class="card-text" th:text="${agency.getEmail()}"></p>

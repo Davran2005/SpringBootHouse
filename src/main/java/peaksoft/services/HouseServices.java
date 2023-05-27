@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface HouseServices {
     void saveHouse(Long agencyId, House house) throws MyException;
-    List<House> getAllHouses(Long agencyId);
+    List<House> getAllHouses();
     House getHouseById(Long id) throws MyException;
     void updateHouseById(Long id, House house) throws MyException;
     void deleteHouseById(Long id) throws MyException;

@@ -13,7 +13,7 @@ import static jakarta.persistence.CascadeType.*;
 @Table(name = "houses")
 @Getter
 @Setter
-@ToString
+
 @NoArgsConstructor
 public class House {
     @Id

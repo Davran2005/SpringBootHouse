@@ -1,10 +1,428 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>$Title$</title>
+  <title>Update agency</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+        rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
+        crossorigin="anonymous">
 </head>
 <body>
-$END$
+<style>
+  {
+    font-family: 'roboto', sans-serif;
+  }
+
+  header {
+    position: relative;
+  }
+
+  nav {
+    height: 50px;
+    background: #212121;
+  }
+
+  .humburger {
+    display: none;
+  }
+
+  .menu {
+    display: flex;
+    justify-content: space-between;
+    padding: 13px 70px;
+    margin: 0;
+    list-style-type: none;
+  }
+
+  .menu_link {
+    font-style: normal;
+    font-weight: 300;
+    font-size: 15px;
+    color: #FFFFFF;
+  }
+
+  .menu_item {
+    border-right: 2px dotted black;
+    padding-right: 43px;
+  }
+
+  .menu_item:last-child {
+    border-right: none;
+  }
+
+  .subheader {
+    position: absolute;
+    width: 100%;
+    height: 87px;
+    background: rgba(0, 0, 0, 0.6);
+  }
+
+  .subheader_logo {
+    display: block;
+    max-width: 100%;
+    margin-top: 16px;
+  }
+
+  .subheader_official {
+    font-weight: 400;
+    opacity: 0.5;
+    font-size: 15px;
+    color: #FFFFFF;
+  }
+
+  .subheader_call {
+    margin-top: 19px;
+    font-weight: 300;
+    font-size: 12px;
+    text-align: right;
+    color: #FFFFFF;
+  }
+
+  .subheader_number {
+    display: block;
+    margin-top: 8px;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 12px;
+    text-align: right;
+    text-transform: uppercase;
+    color: #FFFFFF;
+  }
+
+  .subheader_buttom {
+    margin-top: 19px;
+    width: 172px;
+    height: 46px;
+    background: linear-gradient(0deg, #1EACC7 0%, #4CE2FF 100%);
+    box-shadow: inset 0px -3px 0px rgba(0, 0, 0, 0.12);
+    border: none;
+    border-radius: 4px;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 46px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.21);
+  }
+
+  .subheader_buttom:hover {
+    background-image: none;
+    background-color: #1eacc7;
+  }
+
+  .promo {
+
+    height: 799px;
+    background: url("https://images.ctfassets.net/pqmtoyw9z10u/2f1Qb628fziWkon2Ys774S/54185717754cbddb6e3eb25d591ad312/swimming-828795_1920.jpg") center center/cover no-repeat;
+  }
+
+  .promo_header {
+    margin-top: 152px;
+    font-weight: 900;
+    font-size: 60px;
+    line-height: 24px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #FFFFFF;
+  }
+
+  .promo_subheader {
+    margin-top: 17px;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 48px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #FFFFFF;
+  }
+
+  .promo_descr {
+    width: 985px;
+    height: 173px;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 24px;
+    text-align: center;
+    color: #FFFFFF;
+  }
+
+  .promo_btn {
+    display: block;
+    margin: 0 auto;
+    margin-top: 116px;
+    width: 259px;
+    height: 63px;
+    background: linear-gradient(0deg, #1EACC7 0%, #4CE2FF 100%);
+    box-shadow: inset 0px -4px 0px rgba(0, 0, 0, 0.12);
+    border-radius: 4px;
+    font-weight: 400;
+    font-size: 18px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.21);
+  }
+
+  .promo_btn:hover {
+    background-image: none;
+    background-color: #1eacc7;
+  }
+
+  footer {
+    padding: 14px 23px 39px 23px;
+  }
+
+  footer a:hover {
+    text-decoration: none;
+  }
+
+  .footer_devider {
+    margin: 0 auto;
+    width: 301px;
+    height: 4px;
+    background: #1FBAD6;
+  }
+
+  .footer_wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-top: 23px;
+  }
+
+  .footer_wrapper > div {
+    width: 33%;
+  }
+
+  .footer_wrapper > div:nth-child(3) {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .footer_social {
+    width: 160px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .footer_social_item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 4px;
+    width: 32px;
+    height: 32px;
+    background-color: #070716;
+    border-radius: 100%;
+  }
+
+  .footer_social_item i {
+    color: #fff;
+  }
+
+  .footer_links {
+    margin: 0 auto;
+  }
+
+  .footer_links_main {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 22px;
+    padding: 0 40px;
+  }
+
+  .footer_links_main a {
+    font-weight: 300;
+    font-size: 15px;
+    text-transform: uppercase;
+    color: #000;
+  }
+
+  .footer_links_sub {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: -15px;
+    padding: 0 20px;
+  }
+
+  .footer_links_sub a {
+    font-weight: 300;
+    font-size: 11px;
+    line-height: 68px;
+    text-transform: uppercase;
+    color: #999999;
+  }
+
+  .footer_links_lang {
+    margin-top: -25px;
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    text-transform: uppercase;
+    color: #1FBAD6;
+  }
+
+  .xs-visible {
+    display: none;
+  }
+  .card-agency {
+    margin-left: 40px;
+    border: 3px solid black;
+
+  }
+  .box-agency{
+    display: flex;
+
+    margin: 105px 50px 50px 50px;
+    padding-left: 40px;
+    width: fit-content;
+    high: 500px
+  }
+  .bax-al{
+
+    border: 3px solid black;
+    display: inline-block;
+    width:max-content;
+    high:600px;
+  }
+  .border{
+    width: 300px;
+    margin: 135px 0 0 450px;
+
+  }
+</style>
+<header>
+  <nav>
+    <div class="container">
+
+      <ul class="menu menu_active">
+        <li class="menu_item"><a href="/index" class="menu_link">Main</a></li>
+        <li class="menu_item"><a href="/agencies" class="menu_link"> Agency</a></li>
+        <li class="menu_item"><a href="/customers" class="menu_link">  Customer </a></li>
+        <li class="menu_item"><a href="/houses" class="menu_link"> House  </a></li>
+        <li class="menu_item"><a href="#" class="menu_link"> Booking </a></li>
+        <li class="menu_item"><a href="#" class="menu_link"> Services</a></li>
+      </ul>
+
+    </div>
+    <div class="hamburger hamburger_active">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </nav>
+  <div class="subheader">
+    <div class="container">
+      <div class="row">
+        <div class="col-6 col-md-4 offset-md-1">
+          <a href="" class="subheader_logo"></a><img src="#" alt="logo">
+          <div class="subheader_official">Make everything possible</div>
+        </div>
+        <div class="xs-hidden col-md-3 offset-md-1 col-xl-2 offset-xl-2">
+          <div class="subheader_call">Call us any time</div>
+          <a href="tel:84957970988" class="subheader_number">8 495 797 09 88</a>
+
+        </div>
+        <div class="col-6 col-md-3">
+          <a href="tel:84957970988" class="xs-visible subheader_number">8 495 797 09 88</a>
+          <button class="subheader_buttom">Apply</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<section class="promo">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 offset-md-0 coll-lg-10
+                offset- coll-lg-10">
+        <div class="border">
+          <form th:method="POST" th:action="@{/customer/update/{id}(id=${customer.id})}" th:object="${customer}">
+            <div>
+              <input type="hidden" name="id" th:field="${id}">
+            </div>
+            <div>
+              <label for="FirstName" class="form-label" >First name</label>
+              <input type="text" class="form-control" id="FirstName" aria-describedby="EmailHelp" th:field="*{firstName}">
+            </div>
+            <div>
+              <label for="LastName" class="form-label" >Last name</label>
+              <input type="text" class="form-control" id="LastName" aria-describedby="EmailHelp" th:field="*{lastName}">
+            </div>
+            <div>
+              <label for="dateOfBirth" class="form-label">Country</label>
+              <input type="date" class="form-control" id="dateOfBirth" th:field="*{dataOfBirth}">
+            </div>
+            <div>
+              <label for="email" class="form-label">Email</label>
+              <input type="text" class="form-control" id="email" th:field="*{email}">
+            </div>
+            <div>
+              <label for="gender" class="form-label">Image</label>
+              <select class="form-select" aria-label="Default select example" th:field="*{gender}" id="gender">
+                <option value="MALE">MALE</option>
+                <option value="FEMALE">FEMALE</option>
+              </select>
+            </div>
+            <div>
+              <label for="phoneNumber" class="form-label">Phone number</label>
+              <input type="text" class="form-control" id="phoneNumber" th:field="*{phoneNumber}">
+            </div>
+            <button type="submit" class="btn btn-success">update</button>
+          </form>-->
+          <!--</div>-->
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</section>
+<footer>
+  <div class="footer_devider"></div>
+  <div class="footer_wrapper">
+    <div>
+      <div class="footer_social">
+        <a href="" class="footer_social_item"><i class="fab fa-facebook-f"></i></a>
+        <a href="" class="footer_social_item"><i class="fab fa-twitter"></i></a>
+        <a href="" class="footer_social_item"><i class="fab fa-linkedin-in"></i></a>
+        <a href="" class="footer_social_item"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+    <div>
+      <div class="footer_links">
+        <div class="footer_links_main">
+          <a href="">на главную</a>
+          <a href="">города</a>
+          <a href="">для водителей</a>
+        </div>
+        <div class="footer_links_sub">
+          <a href="">центр поддержки</a>
+          <a href="">вакансии</a>
+          <a href="">разработчики</a>
+          <a href="">блог</a>
+          <a href="">о нас</a>
+        </div>
+        <a href="" class="footer_links_lang">русский</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer_mobile">
+        <a href="#"><img src="img/app_store.png" alt="App store"></a>
+        <a href="#"><img src="img//google_play.png" alt="Google play"></a>
+        <a href="#"><img src="img/windows_store.png" alt="Windows store"></a>
+      </div>
+    </div>
+  </div>
+</footer>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
 </html>
