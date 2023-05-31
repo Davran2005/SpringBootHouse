@@ -44,28 +44,33 @@ public class BookingApi {
         service.saveBooking(booking);
         return "redirect:/bookings";
     }
-    @DeleteMapping("/delete/{id}")
-    public String delete(@PathVariable Long id) throws MyException {
-        service.deleteBookingById(id);
+    @PostMapping("/delete/{id}")
+    public String delete(@PathVariable Long id) {
+        try {
+            service.deleteBookingById(id);
+        } catch (MyException e) {
+            throw new RuntimeException(e);
+        }
         return "redirect:/bookings";
     }
     @GetMapping("/update/{id}")
     public String updateBooking(@PathVariable Long id, Model model) throws MyException {
         Booking booking = service.getBookingById(id);
         model.addAttribute("booking",booking);
-        model.addAttribute("house",houseService.getAllHouses());
+        model.addAttribute("houses",houseService.getAllHouses());
         model.addAttribute("customers",customerService.getAllCustomers());
-        return "updateBooking";
+        return "/book/updateBooking";
     }
     @PostMapping("/saveUpdate/{id}")
     public String saveBooking(@ModelAttribute("booking") Booking booking,
-                              @RequestParam("houseName") Long houseId,
-                              @RequestParam("customerName") Long customerId,
-                              @PathVariable("id") Long id) throws MyException {
+                              @PathVariable("id") Long id,
+                              @RequestParam("house.id") Long houseId,
+                              @RequestParam("customer.id") Long customerId) throws MyException {
         House house = houseService.getHouseById(houseId);
         Customer customer = customerService.getCustomerById(customerId);
         booking.setHouse(house);
         booking.setCustomer(customer);
+        service.saveBooking(booking);
         service.updateBookingById(id,booking);
         return "redirect:/bookings";
     }

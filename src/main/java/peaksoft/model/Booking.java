@@ -21,6 +21,6 @@ public class Booking {
     private Long id;
     @OneToOne(cascade = {DETACH, MERGE,REFRESH})
     private House house;
-    @ManyToOne(cascade = {DETACH, MERGE,REFRESH,REMOVE})
+    @ManyToOne(cascade = {DETACH, MERGE,REFRESH})
     private Customer customer;
 }

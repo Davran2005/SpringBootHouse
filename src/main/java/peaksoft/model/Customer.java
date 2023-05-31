@@ -36,7 +36,7 @@ public class Customer {
     @Transient
     private Long agencyId;
 
-    @ManyToMany(cascade = {DETACH, MERGE,REFRESH})
+    @ManyToMany(cascade = {DETACH, MERGE,REFRESH,REMOVE})
     private List<Agency>agencies;
     @OneToMany(mappedBy = "customer",cascade = {DETACH, MERGE,REFRESH,REMOVE})
     private List<Booking>bookings;

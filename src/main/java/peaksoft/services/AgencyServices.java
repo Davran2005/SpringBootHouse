@@ -12,4 +12,5 @@ public interface AgencyServices {
     void updateAgency(Long id,Agency agency) throws MyException;
     void deleteAgencyById(Long id) throws MyException;
     List<Agency> searchAgency(String word);
+
 }

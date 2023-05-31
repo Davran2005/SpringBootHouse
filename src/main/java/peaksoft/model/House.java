@@ -32,6 +32,6 @@ public class House {
     private String houseTypeString;
     @ManyToOne(cascade = {DETACH, MERGE, REFRESH})
     private Agency agency;
-    @OneToOne(mappedBy = "house", cascade = {DETACH, MERGE, REFRESH})
+    @OneToOne(mappedBy = "house", cascade = {DETACH, MERGE, REFRESH,REMOVE})
     private Booking booking;
 }

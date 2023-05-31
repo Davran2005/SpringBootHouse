@@ -8,16 +8,13 @@
 <form  th:action="@{saveBooking}" th:object="${newBooking}" method="POST">
   <label for="houseId">House:</label>
   <select id="houseId" name="house.id">
-    <option th:each="house : ${houses}" th:value="${house.id}" th:text="${house.houseType}"></option>
+    <option th:each="house : ${houses}" th:value="${house.getId()}" th:text="${house.houseType}"></option>
   </select>
-
   <label for="customerId">Customer:</label>
-
   <select id="customerId" name="customer.id" >
-    <option th:each="customer : ${customers}" th:value="${customer.id}" th:text="${customer.firstName}"></option>
+    <option th:each="customer : ${customers}" th:value="${customer.getId()}" th:text="${customer.firstName}"></option>
   </select>
   <button type="submit">Save</button>
 </form>
-
 </body>
 </html>

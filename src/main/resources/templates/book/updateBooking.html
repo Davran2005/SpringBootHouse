@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <title>Update booking</title>
@@ -7,13 +7,12 @@
 <body>
 <form  th:action="@{/bookings/saveUpdate/{id}(id=${booking.getId()})}" th:object="${booking}" method="POST">
   <label for="houseId">House:</label>
-  <select id="houseId" name="houseName">
-    <option th:each="house : ${house}" th:value="${house.id}" th:text="${house.houseType}"></option>
+  <select id="houseId" name="house.id">
+    <option th:each="house : ${houses}" th:value="${house.getId()}" th:text="${house.houseType}"></option>
   </select>
-
   <label for="customerId">Customer:</label>
-  <select id="customerId" name="customerName" >
-    <option th:each="customer : ${customers}" th:value="${customer.id}" th:text="${customer.firstName}"></option>
+  <select id="customerId" name="customer.id" >
+    <option th:each="customer : ${customers}" th:value="${customer.getId()}" th:text="${customer.firstName}"></option>
   </select>
   <button type="submit">Save</button>
 </form>

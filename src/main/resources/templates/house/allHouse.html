@@ -9,73 +9,20 @@
           crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <style>
-        * {box-sizing: border-box;}
-
-        body {
-            margin: 0;
-            font-family: Arial, Helvetica, sans-serif;
-        }
-
-        .header {
-            overflow: hidden;
-            background-color: #f1f1f1;
-            padding: 20px 10px;
-        }
-
-        .header a {
-            float: left;
-            color: black;
-            text-align: center;
-            padding: 12px;
-            text-decoration: none;
-            font-size: 18px;
-            line-height: 25px;
-            border-radius: 4px;
-        }
-
-        .header a.logo {
-            font-size: 25px;
-            font-weight: bold;
-        }
-
-        .header a:hover {
-            background-color: #ddd;
-            color: black;
-        }
-
-        .header a.active {
-            background-color: dodgerblue;
-            color: white;
-        }
-
-        .header-right {
-            float: right;
-        }
-
-        @media screen and (max-width: 500px) {
-            .header a {
-                float: none;
-                display: block;
-                text-align: left;
-            }
-
-            .header-right {
-                float: none;
-            }
-        }
-    </style>
 </head>
 <body>
 <div class="header">
     <a th:href="@{/agencies}">
-        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-chevron-left"
+             viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+                  d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
         </svg>
         <a class="logo" th:text="${agency.getName()}">Name</a>
     </a>
     <p style="text-align:center; margin-left: 550px">
-        <a class="btn btn-outline-primary" role="button" th:href="@{/houses/{agencyId}/new(agencyId=${agencyId})}">Add new House</a>
+        <a class="btn btn-outline-primary" role="button" th:href="@{/houses/{agencyId}/new(agencyId=${agencyId})}">Add
+            new House</a>
     </p>
     <div class="header-right">
     </div>
@@ -106,12 +53,14 @@
         <td th:text="${house.getPrice()}"></td>
         <td th:text="${house.getRoom()}"></td>
         <td>
-            <form th:method="GET" th:action="@{/houses/{agencyId}/{houseId}/edit(agencyId=${agencyId},houseId=${house.getId()})}">
+            <form th:method="GET"
+                  th:action="@{/houses/{agencyId}/{houseId}/edit(agencyId=${agencyId},houseId=${house.getId()})}">
                 <input type="submit" class="btn btn-primary" th:value="Update"/>
             </form>
         </td>
         <td>
-            <form th:method="GET"
+
+            <form th:method="Get"
                   th:action="@{/houses/{agencyId}/{id}/delete (agencyId=${agencyId}, id=${house.getId()})}">
                 <input type="submit" class="btn btn-outline-primary" th:value="  Delete  "></input>
             </form>

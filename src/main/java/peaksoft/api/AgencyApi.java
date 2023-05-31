@@ -17,21 +17,24 @@ public class AgencyApi {
     private final AgencyServices agencyServices;
     private final HouseServices houseServices;
     private final CustomerRepository customerServices;
+
     @GetMapping
     public String getAllAgency(Model model) {
-        model.addAttribute("getAllAgency",agencyServices.getAllAgencies());
+        model.addAttribute("getAllAgency", agencyServices.getAllAgencies());
         return "/agencies/index";
     }
+
     @GetMapping("/new")
     public String create(Model model) {
         model.addAttribute("agency", new Agency());
         return "/agencies/newAgency";
     }
+
     @GetMapping("/k/{id}")
     public String getById(@PathVariable("id") Long agencyId, Model model) {
         int countHouse = houseServices.getAllHouses().size();
         try {
-            model.addAttribute("countHouse",countHouse);
+            model.addAttribute("countHouse", countHouse);
             model.addAttribute("agency", agencyServices.getAgencyById(agencyId));
             return "/agencies/index";
         } catch (MyException e) {

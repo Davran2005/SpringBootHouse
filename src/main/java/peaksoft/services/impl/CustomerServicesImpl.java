@@ -16,6 +16,7 @@ import peaksoft.services.CustomerServices;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 @RequiredArgsConstructor
@@ -104,6 +105,7 @@ public class CustomerServicesImpl implements CustomerServices {
         customer.setId(customer1.getId());
         customerRepository.save(customer);
     }
+
 
     @Override
     public void deleteCustomerById(Long id) throws MyException {

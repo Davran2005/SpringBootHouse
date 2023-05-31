@@ -18,7 +18,7 @@ public class HouseApi {
     private final AgencyServices agencyServices;
 
     @GetMapping
-    public String getAllHouse(@PathVariable Long agencyId, Model model) throws MyException {
+    public String getAllHouse(@PathVariable  Long agencyId, Model model) throws MyException {
         model.addAttribute("houses", houseServices.getAllHouses());
         model.addAttribute("agencyId", agencyId);
         model.addAttribute("agency", agencyServices.getAgencyById(agencyId));

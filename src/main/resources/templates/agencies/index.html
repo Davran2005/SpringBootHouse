@@ -222,6 +222,10 @@
     <input class="header-right" style="display: none"  type="button">
     <a class="active" th:href="@{/customer}" >Customer</a>
   </div>
+  <div class="header-right" >
+    <input class="header-right" style="display: none"  type="button">
+    <a class="active" th:href="@{/bookings}" >Booking</a>
+  </div>
 </div>
 <div class="row row-cols-1 row-cols-md-3 g-4">
   <div style="text-align:center;" th:each="agency : ${getAllAgency}">
